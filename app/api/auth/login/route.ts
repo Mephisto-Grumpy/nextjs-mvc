@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { compare } from 'bcrypt'
 import { fetchUser } from '@/services/userService'
+import { compare } from 'bcrypt'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   try {

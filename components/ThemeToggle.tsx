@@ -1,52 +1,23 @@
 'use client'
 
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
-import { useEffect, useState } from 'react'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import * as React from 'react'
 
-export default function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
+import { Button } from './ui/Button'
 
-  useEffect(() => {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark')
-      setIsDarkMode(true)
-    } else {
-      document.documentElement.classList.remove('dark')
-      setIsDarkMode(false)
-    }
-  }, [])
-
-  const toggleDarkMode = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove('dark')
-      localStorage.theme = 'light'
-      setIsDarkMode(false)
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.theme = 'dark'
-      setIsDarkMode(true)
-    }
-  }
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme()
 
   return (
-    <div className="relative inline-flex items-center p-1 rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors duration-300 ease-in-out">
-      <button
-        className={`p-2 rounded-full transition-colors duration-300 ease-in-out ${
-          isDarkMode ? 'bg-zinc-700' : 'bg-zinc-300'
-        }`}
-        onClick={toggleDarkMode}
-        aria-label="Toggle Dark Mode"
-      >
-        {isDarkMode ? (
-          <SunIcon className="w-6 h-6 text-zinc-100" />
-        ) : (
-          <MoonIcon className="w-6 h-6 text-zinc-800" />
-        )}
-      </button>
-    </div>
+    <Button
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      size="icon"
+      variant="ghost"
+    >
+      <span className="sr-only">Toggle theme</span>
+      <Sun className="h-5 w-5 dark:hidden" />
+      <Moon className="hidden h-5 w-5 dark:block" />
+    </Button>
   )
 }

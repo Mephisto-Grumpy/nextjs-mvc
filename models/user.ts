@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma'
 
 export interface User {
-  id: string
   email: string
+  id: string
   password: string
 }
 

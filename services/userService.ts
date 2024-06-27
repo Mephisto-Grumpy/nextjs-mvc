@@ -1,4 +1,4 @@
-import { createUser, getUserById, User } from '@/models/user'
+import { User, createUser, getUserById } from '@/models/user'
 
 export async function fetchUser(id: string): Promise<User | null> {
   return getUserById(id)

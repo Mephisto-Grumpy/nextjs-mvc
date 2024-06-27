@@ -1,15 +1,19 @@
 import type { Metadata } from 'next'
-import { M_PLUS_1 } from 'next/font/google'
-import './globals.css'
-import { Toaster } from 'react-hot-toast'
-import { Suspense } from 'react'
-import Header from '@/components/Header'
 
-const mplus = M_PLUS_1({ subsets: ['latin'] })
+import Header from '@/components/Header'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { cn } from '@/lib/utils'
+import { M_PLUS_1 } from 'next/font/google'
+import { Suspense } from 'react'
+import { Toaster } from 'react-hot-toast'
+
+import './globals.css'
+
+const mplus = M_PLUS_1({ subsets: ['latin'], variable: '--font-mplus' })
 
 export const metadata: Metadata = {
-  title: 'Next.js with Tailwind CSS (MVC Architecture)',
-  description: 'Template for Next.js with Tailwind CSS (MVC Architecture)'
+  description: 'Template for Next.js with Tailwind CSS (MVC Architecture)',
+  title: 'Next.js with Tailwind CSS (MVC Architecture)'
 }
 
 export default function RootLayout({
@@ -19,12 +23,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={mplus.className}>
-        <Toaster />
-        <Suspense fallback={'Loading...'}>
-          <Header />
-        </Suspense>
-        {children}
+      <body
+        className={cn(
+          'min-h-screen bg-background font-mplus antialiased"',
+          mplus.variable
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <Toaster />
+          <Suspense fallback={'Loading...'}>
+            <Header />
+          </Suspense>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

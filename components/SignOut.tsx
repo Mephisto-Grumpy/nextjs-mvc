@@ -3,12 +3,11 @@
 export default function SignOut() {
   return (
     <button
-      className="text-stone-400 hover:text-stone-200 transition-all"
       onClick={() => {
         fetch('/api/auth/signout', {
-          method: 'POST',
+          credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin'
+          method: 'POST'
         })
           .then(res => {
             if (res.ok) {
@@ -20,7 +19,7 @@ export default function SignOut() {
           })
       }}
     >
-      Goddammit, sign me out!
+      Sign out
     </button>
   )
 }
