@@ -9,6 +9,7 @@ This is a template project for creating a Next.js application with Tailwind CSS,
 Ensure you have the following installed on your machine:
 
 - [Bun](https://bun.sh/) - A modern build tool for JavaScript and TypeScript projects.
+- [Supabase](https://supabase.io/) - An open-source alternative to Firebase.
 
 ### Installation
 
@@ -21,6 +22,20 @@ bun install
 ```
 
 ### Database Setup
+
+Create a new Supabase project and set up the [environment variables](.env.example) in the `.env` file:
+
+```bash
+cp .env.example .env
+```
+
+Update the `.env` file with your Supabase credentials:
+
+```bash
+# Database Configuration for Prisma
+DATABASE_URL=""
+DIRECT_URL=""
+```
 
 Set up the database and run the migrations:
 
